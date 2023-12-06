@@ -1,0 +1,99 @@
+/*----------- Login ------------*/
+* {
+  background-color: #22303c;
+}
+.login {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 57px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-h1 {
+  font-family: "Cedarville Cursive", cursive;
+  font-family: "Noto Sans", sans-serif;
+  font-family: "Roboto Mono", monospace;
+  font-size: 40px;
+  color: white;
+}
+
+.login-container div {
+  display: flex;
+  flex-direction: column;
+}
+.login-icons {
+  width: 1.5rem;
+  position: relative;
+  left: 31rem;
+  bottom: 3rem;
+  cursor: pointer;
+}
+.login-main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 800px;
+  height: 90vh;
+  margin-top: 28px;
+}
+.doge-img {
+  width: 280px;
+  border-radius: 150px;
+}
+
+/* ----------- signup ------------- */
+
+.sign-up-icons {
+  width: 1.5rem;
+  position: relative;
+  left: 90%;
+  bottom: 3rem;
+  cursor: pointer;
+}
+
+.signup {
+  height: 7rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+.signup-h1 {
+  font-family: "Cedarville Cursive", cursive;
+  font-family: "Noto Sans", sans-serif;
+  font-family: "Roboto Mono", monospace;
+  font-size: 28px;
+  color: white;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-btn {
+  text-align: center;
+}
+.signup-main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 800px;
+  height: 90vh;
+  margin-top: 40px;
+  gap: 2rem;
+}
+
+/* ----------- otp page --------- */
+
+.otp-container {
+  color: white;
+  background-color: aliceblue;
+}
