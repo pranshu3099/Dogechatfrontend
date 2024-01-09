@@ -5,7 +5,6 @@ import Doge from "../icons/Doge.jpg";
 import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-
 const Signup = () => {
   const mobileValidate = (number) => {
     return /(?=.{10}$)/.test(number);
@@ -111,7 +110,7 @@ const Signup = () => {
             Hello vro!! Welcome to Doge Chat
           </h1>
         </div>
-        <div>
+        <div className="doge-img-container">
           <img src={Doge} alt="" className="doge-img" />
         </div>
         <form action="" className="form">
