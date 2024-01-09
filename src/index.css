@@ -1,6 +1,9 @@
 /*----------- Login ------------*/
-* {
-  background-color: #22303c;
+body {
+  background-color: #22303c !important;
+}
+p {
+  color: white;
 }
 .login {
   height: 10rem;
@@ -96,4 +99,246 @@
 .otp-container {
   color: white;
   background-color: aliceblue;
+}
+
+/*------------------ profile-picture--------------- */
+
+.user-image-main-container {
+  height: 110vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.user-image-container {
+  border: 4px dashed rgb(77, 182, 230);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 400px;
+  height: 50vh;
+  margin: 0 auto;
+}
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-input {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.file-name {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload {
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.upload-img {
+  height: 20vh;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  gap: 1rem;
+}
+
+.profilepicture {
+  width: 200px;
+  border-radius: 250px;
+  height: 250px;
+}
+
+.image-wrapper {
+  width: 200px !important;
+  height: 250px !important;
+}
+
+.chat-main-container {
+  display: flex;
+  background-color: #202c33;
+  height: 95vh;
+  max-width: 90rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.chat-container {
+  color: white;
+  background-color: #121b22;
+  width: 500px;
+}
+
+/* -------------- DogeList --------------------- */
+
+.dog-container {
+  background-color: #121b22;
+  height: 10vh;
+  margin-top: 50px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 20px;
+}
+
+.dog-container img {
+  border-radius: 30px;
+}
+
+.doge-name {
+  border-top: 1px solid rgba(134, 150, 160, 0.15);
+  border-bottom: 1px solid rgba(134, 150, 160, 0.15);
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+}
+
+.dog-container p {
+  display: inline;
+  /* background-color: #121b22; */
+  width: 100%;
+}
+
+.dog-container:hover {
+  background-color: rgba(189, 180, 180, 0.247) !important;
+  cursor: pointer;
+}
+
+/*-------------- chatroom---------------- */
+
+.chatroom-container {
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.chatroom-name {
+  /* background-color: red; */
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.chatroom-name img {
+  border-radius: 30px;
+}
+
+.chatroom-inputbox {
+  /* background-color: red; */
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.chat-input {
+  width: 90% !important;
+  height: 52px;
+  min-height: 0px !important;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999999;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* color of the track */
+}
+
+.main-chats {
+  /* background-color: burlywood; */
+  width: 100%;
+  height: 80vh;
+  overflow-y: scroll;
+  display: flex;
+  align-items: end;
+}
+
+.main-chats div {
+  /* background-color: red; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+
+.user-message {
+  background-color: #005c4b;
+  width: 50%;
+  text-align: left;
+  padding-left: 8px;
+  height: 110px;
+  margin: 0px 60px 10% 0px;
+}
+
+.doge-message {
+  background-color: #085988;
+  width: 20%;
+  text-align: left;
+  padding-left: 8px;
+  margin: 0px 6% 0px 60px;
+}
+
+/* html[dir="ltr"] .main-chats .user-message {
+  right: -8px;
+} */
+
+.chatroom-sub-container {
+  /* background-color: #4caf50; */
+  height: 170rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.send-btn {
+  width: 50px;
+  cursor: pointer;
 }
