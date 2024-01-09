@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import VerifyOtp from "./components/Otp";
-import Profile from "./components/Profile";
+import { Chat } from "./components/Chat";
+import Image from "./components/Image";
 import "./App.css";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
           <Route path="/dogechat/login" element={<Login />}></Route>
           <Route path="/dogechat/signup" element={<Signup />}></Route>
           <Route path="/dogechat/verifyotp" element={<VerifyOtp />}></Route>
-          <Route path="/dogechat/userprofile" element={<Profile />}></Route>
+          <Route path="/dogechat" element={<Chat />}></Route>
+          <Route path="/dogechat/upload-image" element={<Image />}></Route>
         </Routes>
       </BrowserRouter>
     </>
