@@ -4,33 +4,31 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import useFetch from "../../usefetch/auth";
+import { useLocation } from "react-router-dom";
 const Login = () => {
   const [mobileNumber, setMobileNumber] = React.useState("");
-  const [error, setError] = React.useState("");
   const [auth, setAuth] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/dogechat/checkvalidity")
-      .then((response) => {
-        if (response.status === 200) {
-          setAuth(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  const fetch = () => {
+  const { data, err } = useFetch();
+  const location = useLocation();
+  let profilepicture = location?.state?.data?.url[0].path;
+  if (!profilepicture) {
+    profilepicture = data?.user?.profilepicture;
+  }
+  const fetchData = () => {
     const info = {
       mobile_number: mobileNumber,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     };
     axios
-      .post("http://localhost:3000/dogechat/login", info)
+      .post(`http://localhost:3000/dogechat/login`, info)
       .then((response) => {
         if (response.status === 200) {
           setAuth(true);
+          console.log(response);
         }
       })
       .catch((err) => {
@@ -40,7 +38,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch();
+    fetchData();
   };
 
   return (
@@ -49,8 +47,12 @@ const Login = () => {
         <div className="login">
           <h1 className="login-h1">Login to Doge Chat</h1>
         </div>
-        <div>
-          <img src={Doge} alt="" className="doge-img" />
+        <div className="image-wrapper">
+          <img
+            src={profilepicture ? profilepicture : Doge}
+            alt=""
+            className={profilepicture ? "profilepicture" : "doge-img"}
+          />
         </div>
         <form action="">
           <div className="login-container">
@@ -75,7 +77,9 @@ const Login = () => {
           </div>
         </form>
       </div>
-      {auth && <Navigate to="/dogechat/userprofile" />}
+      {(auth || data?.user) && (
+        <Navigate to="/dogechat" state={{ user: data?.user }} />
+      )}
     </>
   );
 };
