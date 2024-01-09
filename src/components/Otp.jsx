@@ -1,7 +1,8 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { Input, Button } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 const otpReducer = (state, action) => {
   switch (action.type) {
     case "input1":
@@ -21,6 +22,7 @@ const VerifyOtp = () => {
   const location = useLocation();
   const verificationInfo = location.state;
   let { mobileNumber } = verificationInfo;
+  const [auth, setAuth] = useState(false);
   const [data, dispatch] = useReducer(otpReducer, {
     input1: "",
     input2: "",
@@ -38,6 +40,7 @@ const VerifyOtp = () => {
       .post("http://localhost:3000/dogechat/verifyotp", info)
       .then((res) => {
         console.log(res);
+        setAuth(res?.data?.success);
       })
       .catch((err) => console.log(err));
   };
@@ -125,6 +128,9 @@ const VerifyOtp = () => {
           </div>
         </form>
       </div>
+      {auth && (
+        <Navigate to="/dogechat/upload-image" state={{ mobileNumber }} />
+      )}
     </>
   );
 };
