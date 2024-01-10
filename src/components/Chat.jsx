@@ -6,15 +6,20 @@ import DogeList from "./DogeList";
 import Chatroom from "./Chatroom";
 import { useLocation } from "react-router-dom";
 export const Chat = () => {
-  const [message, setMessages] = useState("");
+  const [messagearr, setMessagesarr] = useState([]);
   const socket = io("http://localhost:3000", { path: "/socket.io" });
   const location = useLocation();
   // console.log(location);
   // let profilepicture = location?.state?.data?.url[0].path;
   useEffect(() => {
-    socket.on("chat message", (msg) => {
+    socket.on("chat message", (msg, type = null) => {
+      console.log(type);
       console.log("Recieved message", msg);
-      setMessages(msg);
+      if (type === "doge") {
+        setMessagesarr((prev) => {
+          return [...prev, { message: msg, role: "doge" }];
+        });
+      }
     });
 
     return () => {
@@ -23,13 +28,17 @@ export const Chat = () => {
   }, []);
 
   const sendMessage = (message) => {
-    socket.emit("chat message", message);
+    socket.emit("chat message", message, "user");
   };
 
   return (
     <div className="chat-main-container">
       <DogeList />
-      <Chatroom sendMessage={sendMessage} recievedmessage={message} />
+      <Chatroom
+        sendMessage={sendMessage}
+        setMessagesarr={setMessagesarr}
+        messagearr={messagearr}
+      />
     </div>
   );
 };
