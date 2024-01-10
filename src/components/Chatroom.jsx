@@ -1,26 +1,27 @@
 import Doge from "../icons/Doge.jpg";
 import sendbutton from "../icons/send-alt-1-svgrepo-com.svg";
 import { Textarea } from "@chakra-ui/react";
-import { useState } from "react";
-const Chatroom = ({ sendMessage, recievedmessage }) => {
-  const [messsage, setMessage] = useState("");
-
+import { useState, useEffect } from "react";
+import React from "react";
+const Chatroom = ({ sendMessage, setMessagesarr, messagearr }) => {
+  const [message, setMessage] = useState("");
   const handleMessage = (message) => {
-    const textInput = document.querySelector(".chat-input");
     setMessage(message);
   };
 
   const handleSendMessage = () => {
-    if (messsage === "" || checkForSpaces()) return;
+    if (message === "" || checkForSpaces()) return;
     else {
-      console.log(messsage);
-      // sendMessage(messsage);
+      setMessagesarr((prev) => {
+        return [...prev, { message: message, role: "user" }];
+      });
+      sendMessage(message);
       setMessage("");
     }
   };
 
   function checkForSpaces() {
-    let trimmedText = messsage;
+    let trimmedText = message;
     let pattern = /^\s*$/;
     return pattern.test(trimmedText);
   }
@@ -43,51 +44,14 @@ const Chatroom = ({ sendMessage, recievedmessage }) => {
             <p>cheems</p>
           </div>
           <div className="main-chats">
-            <div>
-              <p className="user-message">
-                You can achieve this by using the justify-content property on
-                the container with a value of space-between. This will
-                distribute the child elements along the main axis, pushing one
-                to the left end and the other to the right end. Here's an
-                example: css ?
-              </p>
-              <p className="doge-message">Hi, i'm fime</p>
-              <p className="user-message">
-                achieve this by using the justify-content property on the
-                container with a value of space-between. This will distribute
-                the child elements along the main axis, pushing one to the left
-                end and the other to the right end. Here's an example: css ?
-              </p>
-              <p className="doge-message">Hi, i'm fime</p>
-              <p className="user-message">
-                achieve this by using the justify-content property on the
-                container with a value of space-between. This will distribute
-                the child elements along the main axis, pushing one to the left
-                end and the other to the right end. Here's an example: css ?
-              </p>
-              <p className="doge-message">Hi, i'm fime</p>
-              <p className="user-message">
-                achieve this by using the justify-content property on the
-                container with a value of space-between. This will distribute
-                the child elements along the main axis, pushing one to the left
-                end and the other to the right end. Here's an example: css ?
-              </p>
-              <p className="doge-message">Hi, i'm fime</p>
-              <p className="user-message">
-                achieve this by using the justify-content property on the
-                container with a value of space-between. This will distribute
-                the child elements along the main axis, pushing one to the left
-                end and the other to the right end. Here's an example: css ?
-              </p>
-              <p className="doge-message">Hi, i'm fime</p>
-            </div>
+            {<Addelement messagearr={messagearr} />}
           </div>
         </div>
         <div className="chatroom-inputbox">
           <Textarea
             placeholder="yomr memessage"
             className="chat-input"
-            value={messsage}
+            value={message}
             onChange={(e) => {
               handleMessage(e.target.value);
             }}
@@ -105,4 +69,21 @@ const Chatroom = ({ sendMessage, recievedmessage }) => {
   );
 };
 
+const Addelement = React.memo(({ messagearr }) => {
+  console.log(messagearr);
+  return messagearr.length
+    ? messagearr.reverse().map((msg, index) => {
+        return (
+          <div className="chats">
+            <p
+              className={msg?.role === "user" ? "user-message" : "doge-message"}
+              key={index}
+            >
+              {msg?.message}
+            </p>
+          </div>
+        );
+      })
+    : null;
+});
 export default Chatroom;
