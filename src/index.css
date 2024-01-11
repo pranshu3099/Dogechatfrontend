@@ -295,7 +295,7 @@ input[type="file"] {
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  align-items: flex-end;
 }
 
 .user-message {
