@@ -1,7 +1,7 @@
 import Doge from "../icons/Doge.jpg";
 import sendbutton from "../icons/send-alt-1-svgrepo-com.svg";
 import { Textarea } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 const Chatroom = ({
   sendMessage,
@@ -12,6 +12,25 @@ const Chatroom = ({
   open,
 }) => {
   const [message, setMessage] = useState("");
+  useEffect(() => {
+    const scrollToBottom = () => {
+      const content = document.querySelector(".main-chats");
+      if (content) {
+        content.scrollTop = content.scrollHeight;
+      }
+    };
+    scrollToBottom();
+
+    const handleScroll = () => {
+      scrollToBottom();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [open]);
   const handleMessage = (message) => {
     setMessage(message);
   };
@@ -40,7 +59,7 @@ const Chatroom = ({
       e.preventDefault();
       handleSendMessage();
     } else if (e.key === "Enter" && e.shiftKey) {
-      setMessage(messsage + "\n");
+      setMessage(message + "\n");
     }
   };
 
