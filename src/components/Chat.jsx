@@ -25,15 +25,14 @@ export const Chat = () => {
       localStorage.setItem("chats", JSON.stringify(chats));
     }
   };
+
   useEffect(() => {
-    socket.on("chat_message", (msg, type = null) => {
-      console.log("Recieved message", msg);
+    socket.on("chat message", (msg, type = null) => {
       let doge_new_message = { message: msg, role: "doge" };
       if (type === "doge") {
         setMessagesarr((prev) => {
           return [...prev, doge_new_message];
         });
-        console.log(messagearr, "chatss");
         addToLocalStorage(doge_new_message);
       }
     });
@@ -51,7 +50,7 @@ export const Chat = () => {
   }, []);
 
   const sendMessage = (message) => {
-    socket.emit("chat_message", message, "user");
+    socket.emit("chat message", message, "user");
   };
 
   const handleOpen = () => {
