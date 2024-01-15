@@ -337,3 +337,19 @@ input[type="file"] {
   width: 50px;
   cursor: pointer;
 }
+
+/* ----------- emoji --------------- */
+
+.epr-main {
+  width: 320px !important;
+  position: absolute;
+  bottom: 60px;
+  right: 24%;
+}
+
+.emoji {
+  width: 35px;
+  cursor: pointer;
+  position: absolute;
+  right: 420px;
+}
