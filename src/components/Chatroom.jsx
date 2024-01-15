@@ -1,7 +1,9 @@
 import Doge from "../icons/Doge.jpg";
 import sendbutton from "../icons/send-alt-1-svgrepo-com.svg";
+import emoji from "../icons/emoji-smile-svgrepo-com.svg";
 import { Textarea } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import Emoji from "./Emoji";
 import React from "react";
 const Chatroom = ({
   sendMessage,
@@ -12,6 +14,7 @@ const Chatroom = ({
   open,
 }) => {
   const [message, setMessage] = useState("");
+  const [emojipicker, setEmojipicker] = useState(false);
   useEffect(() => {
     const scrollToBottom = () => {
       const content = document.querySelector(".main-chats");
@@ -32,6 +35,9 @@ const Chatroom = ({
     };
   }, [open]);
   const handleMessage = (message) => {
+    // if (message.tagName && message.tagName.toLowerCase() === "img") {
+
+    // }
     setMessage(message);
   };
 
@@ -63,6 +69,10 @@ const Chatroom = ({
     }
   };
 
+  const handleEmojiPicker = () => {
+    emojipicker ? setEmojipicker(false) : setEmojipicker(true);
+  };
+
   return (
     <>
       {open ? (
@@ -86,6 +96,15 @@ const Chatroom = ({
               }}
               onKeyPress={handleKeyPress}
             ></Textarea>
+            {emojipicker ? <Emoji handleMessage={handleMessage} /> : null}
+
+            <img
+              src={emoji}
+              alt=""
+              className="emoji"
+              onClick={handleEmojiPicker}
+            />
+
             <img
               src={sendbutton}
               alt=""
