@@ -1,18 +1,17 @@
-import EmojiPicker from "emoji-picker-react";
-
+import { Data } from "emoji-mart";
+import EmojiPicker from "@emoji-mart/react";
 const Emoji = ({ handleMessage }) => {
-  const handleEmoji = (e, emojiobject) => {
-    handleMessage(emojiobject.target);
+  const handleEmoji = (e) => {
+    let emoji_arr = [];
+    return function (e) {
+      emoji_arr.push(e.native);
+      handleMessage(emoji_arr);
+    };
   };
   return (
     <>
       <div className="emoji-container">
-        <EmojiPicker
-          onEmojiClick={handleEmoji}
-          style={{
-            width: "0px !important",
-          }}
-        />
+        <EmojiPicker data={Data} onEmojiSelect={handleEmoji()} />
       </div>
     </>
   );

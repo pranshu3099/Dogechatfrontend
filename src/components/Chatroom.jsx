@@ -2,7 +2,7 @@ import Doge from "../icons/Doge.jpg";
 import sendbutton from "../icons/send-alt-1-svgrepo-com.svg";
 import emoji from "../icons/emoji-smile-svgrepo-com.svg";
 import { Textarea } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Emoji from "./Emoji";
 import React from "react";
 const Chatroom = ({
@@ -15,11 +15,13 @@ const Chatroom = ({
 }) => {
   const [message, setMessage] = useState("");
   const [emojipicker, setEmojipicker] = useState(false);
+  const chatContainerRef = useRef();
   useEffect(() => {
+    console.log("first");
     const scrollToBottom = () => {
-      const content = document.querySelector(".main-chats");
-      if (content) {
-        content.scrollTop = content.scrollHeight;
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop =
+          chatContainerRef.current.scrollHeight;
       }
     };
     scrollToBottom();
@@ -33,18 +35,28 @@ const Chatroom = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [open]);
+  }, [open, message, messagearr]);
   const handleMessage = (message) => {
-    // if (message.tagName && message.tagName.toLowerCase() === "img") {
-
-    // }
-    setMessage(message);
+    if (Array.isArray(message)) {
+      let emoji = message.join("");
+      setMessage((msg) => {
+        return msg + emoji;
+      });
+    } else {
+      setMessage(message);
+    }
+    if (emojipicker && !Array.isArray(message)) {
+      setEmojipicker(false);
+    }
   };
 
   const handleSendMessage = () => {
     if (message === "" || checkForSpaces()) return;
     else {
-      let user_new_message = { message: message, role: "user" };
+      let user_new_message = {
+        message: message,
+        role: "user",
+      };
       setMessagesarr((prev) => {
         return [...prev, user_new_message];
       });
@@ -82,7 +94,7 @@ const Chatroom = ({
               <img src={Doge} style={{ width: "50px" }} />
               <p>cheems</p>
             </div>
-            <div className="main-chats">
+            <div className="main-chats" ref={chatContainerRef}>
               {<Addelement messagearr={messagearr} getChats={getChats} />}
             </div>
           </div>
