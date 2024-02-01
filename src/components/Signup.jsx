@@ -1,7 +1,7 @@
 import { Input, Button } from "@chakra-ui/react";
 import user from "../icons/user.png";
 import Doge from "../icons/Doge.jpg";
-
+import email from "../icons/email.png";
 import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
@@ -12,6 +12,10 @@ const Signup = () => {
 
   const name_validate = (name) => {
     return /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(name);
+  };
+
+  const emailValidate = (text) => {
+    return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(text);
   };
 
   const signupReducer = (data, action) => {
@@ -41,6 +45,20 @@ const Signup = () => {
           mobileVerification: false,
         };
 
+      case "email":
+        if (!emailValidate(action.email)) {
+          return {
+            ...data,
+            email: action.email,
+            emailVerification: action.emailVerification,
+          };
+        }
+        return {
+          ...data,
+          email: action.email,
+          emailVerification: false,
+        };
+
       default:
         throw new Error("type not matched");
     }
@@ -49,18 +67,11 @@ const Signup = () => {
     name: "",
 
     mobile_number: "",
+
+    email: "",
   });
   const [requiredFields, setRequireFields] = useState({});
   const [auth, setAuth] = useState(false);
-  const getBearerToken = () => localStorage.getItem("Bearer");
-  const [bearer] = useState(getBearerToken);
-  // const headers = useMemo(
-  //   () => ({
-  //     Authorization: `Bearer ${bearer}`,
-  //     "Content-Type": "application/json",
-  //   }),
-  //   [bearer]
-  // );
 
   function fetchdata(info) {
     axios
@@ -97,6 +108,7 @@ const Signup = () => {
       name: data.name,
 
       mobile_number: data.mobile_number,
+      email: data.email,
     };
     if (checkRequiredfields(info)) {
       fetchdata(info);
@@ -167,6 +179,32 @@ const Signup = () => {
               )}
               {requiredFields.mobile_number && (
                 <div style={{ color: "red" }}> Mobile number is required</div>
+              )}
+
+              <Input
+                type="email"
+                placeholder="your email"
+                width={"500px"}
+                margin={5}
+                variant="flushed"
+                name="email"
+                value={data.email}
+                onChange={(e) => {
+                  dispatch({
+                    ...data,
+                    email: e.target.value,
+                    type: "email",
+                    emailVerification: true,
+                  });
+                }}
+                style={{ color: "white" }}
+              />
+              <img className="sign-up-icons" src={email} alt="" />
+              {data.emailVerification && (
+                <div style={{ color: "red" }}>Invalid email address</div>
+              )}
+              {requiredFields.email && (
+                <div style={{ color: "red" }}> email address is required</div>
               )}
 
               <div className="signup-btn">
