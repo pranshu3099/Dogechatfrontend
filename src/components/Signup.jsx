@@ -2,6 +2,7 @@ import { Input, Button } from "@chakra-ui/react";
 import user from "../icons/user.png";
 import Doge from "../icons/Doge.jpg";
 import email from "../icons/email.png";
+import phone from "../icons/phone.png";
 import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
@@ -171,7 +172,7 @@ const Signup = () => {
                 }}
                 style={{ color: "white" }}
               />
-              <img className="sign-up-icons" src={user} alt="" />
+              <img className="sign-up-icons" src={phone} alt="" />
               {data.mobileVerification && (
                 <div style={{ color: "red" }}>
                   Mobile number must be of 10 digits
