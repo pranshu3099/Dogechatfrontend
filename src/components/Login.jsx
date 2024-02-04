@@ -6,9 +6,11 @@ import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import useFetch from "../../usefetch/auth";
 import { useLocation } from "react-router-dom";
+import phone from "../icons/phone.png";
 const Login = () => {
   const [mobileNumber, setMobileNumber] = React.useState("");
   const [auth, setAuth] = useState(false);
+  const [Error, setError] = useState("");
   const { data, err } = useFetch();
   const location = useLocation();
   let profilepicture = location?.state?.data?.url[0].path;
@@ -33,6 +35,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError(err?.response?.data?.message);
       });
   };
 
@@ -70,6 +73,8 @@ const Login = () => {
               style={{ color: "white" }}
             />
           </div>
+          <img className="sign-up-icons" src={phone} alt="" />
+          {Error !== "" && <p className="login-error">{Error}</p>}
           <div className="signup-btn">
             <Button colorScheme="blue" mr={3} mt={3} onClick={handleSubmit}>
               Login
