@@ -51,6 +51,12 @@ p {
   border-radius: 150px;
 }
 
+.login-error {
+  color: red;
+  height: 3vh;
+  text-align: center;
+}
+
 /* ----------- signup ------------- */
 
 .sign-up-icons {
