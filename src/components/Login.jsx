@@ -7,6 +7,7 @@ import { useState } from "react";
 import useFetch from "../../usefetch/auth";
 import { useLocation } from "react-router-dom";
 import phone from "../icons/phone-svgrepo-com.svg";
+const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const axios = Axios.create({
   withCredentials: true,
 });
@@ -30,7 +31,7 @@ const Login = () => {
     };
     axios
       .post(
-        `http://localhost:3000/dogechat/login`,
+        `${react_api_url}/dogechat/login`,
         { mobile_number: info.mobile_number },
         {
           headers: info.headers,
