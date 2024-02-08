@@ -358,6 +358,79 @@ input[type="file"] {
   cursor: pointer;
 }
 
+/* -------------- home ----------------- */
+
+.home-h1 {
+  font-family: "Cedarville Cursive", cursive;
+  font-family: "Noto Sans", sans-serif;
+  font-family: "Roboto Mono", monospace;
+  font-size: 60px;
+  color: white;
+}
+
+.home-main-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  /* background-color: #005c4b; */
+}
+
+.home-sub-container {
+  background-color: rgba(0, 0, 0, 0.497);
+  height: 100vh;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.home-signup-container {
+  /* background-color: red; */
+  background-color: #005c4b;
+  height: 100vh;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.home-signup-container h1 {
+  text-align: center;
+  font-size: 90px;
+  font-weight: bold;
+  color: white;
+}
+
+.home-signup-container p {
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+.home-login-btn {
+  letter-spacing: 2px;
+  background-color: gray;
+  padding: 16px;
+  border-radius: 30px;
+  color: white;
+  font-size: 17px;
+}
+
+.home-signup-btn {
+  background-color: white;
+  padding: 16px;
+  border-radius: 30px;
+  color: black;
+  font-size: 17px;
+  font-weight: bold;
+}
+
 /* ----------------- profilepicture ----------------------- */
 
 @media screen and (max-width: 642px) {
