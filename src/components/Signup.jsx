@@ -6,6 +6,7 @@ import phone from "../icons/phone-svgrepo-com.svg";
 import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const Signup = () => {
   const mobileValidate = (number) => {
     return /(?=.{10}$)/.test(number);
@@ -76,7 +77,7 @@ const Signup = () => {
 
   function fetchdata(info) {
     axios
-      .post("http://localhost:3000/dogechat/register", info)
+      .post(`${react_api_url}/dogechat/register`, info)
       .then((response) => {
         if (response.status === 201) {
           setAuth(true);
