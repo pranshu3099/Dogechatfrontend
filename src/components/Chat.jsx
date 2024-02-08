@@ -11,9 +11,7 @@ export const Chat = () => {
   const [open, setOpen] = useState(false);
   const socket = io("http://localhost:3000", { path: "/socket.io" });
   const location = useLocation();
-  // console.log(location);
-  // let profilepicture = location?.state?.data?.url[0].path;
-
+  let profilepicture = location?.state?.user?.profile_picture;
   const addToLocalStorage = (new_message) => {
     let chats = JSON.parse(localStorage.getItem("chats"));
     if (chats) {
@@ -59,7 +57,7 @@ export const Chat = () => {
 
   return (
     <div className="chat-main-container">
-      <DogeList handleOpen={handleOpen} />
+      <DogeList handleOpen={handleOpen} profilepicture={profilepicture} />
       <Chatroom
         sendMessage={sendMessage}
         setMessagesarr={setMessagesarr}
