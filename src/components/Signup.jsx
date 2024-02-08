@@ -1,8 +1,8 @@
 import { Input, Button } from "@chakra-ui/react";
-import user from "../icons/user.png";
+import user from "../icons/person-svgrepo-com.svg";
 import Doge from "../icons/Doge.jpg";
-import email from "../icons/email.png";
-import phone from "../icons/phone.png";
+import email from "../icons/mail-svgrepo-com.svg";
+import phone from "../icons/phone-svgrepo-com.svg";
 import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";

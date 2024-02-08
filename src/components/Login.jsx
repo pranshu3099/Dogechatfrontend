@@ -1,12 +1,15 @@
 import Doge from "../icons/Doge.jpg";
 import { Input, Button } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import axios from "axios";
+import Axios from "axios";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import useFetch from "../../usefetch/auth";
 import { useLocation } from "react-router-dom";
-import phone from "../icons/phone.png";
+import phone from "../icons/phone-svgrepo-com.svg";
+const axios = Axios.create({
+  withCredentials: true,
+});
 const Login = () => {
   const [mobileNumber, setMobileNumber] = React.useState("");
   const [auth, setAuth] = useState(false);
@@ -26,7 +29,13 @@ const Login = () => {
       },
     };
     axios
-      .post(`http://localhost:3000/dogechat/login`, info)
+      .post(
+        `http://localhost:3000/dogechat/login`,
+        { mobile_number: info.mobile_number },
+        {
+          headers: info.headers,
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           setAuth(true);
