@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import VerifyOtp from "./components/Otp";
 import { Chat } from "./components/Chat";
 import Image from "./components/Image";
+import Home from "./components/Home";
 import "./App.css";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/dogechat/login" element={<Login />}></Route>
           <Route path="/dogechat/signup" element={<Signup />}></Route>
           <Route path="/dogechat/verifyotp" element={<VerifyOtp />}></Route>
