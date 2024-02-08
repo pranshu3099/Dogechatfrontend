@@ -3,6 +3,7 @@ import { Input, Button } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const otpReducer = (state, action) => {
   switch (action.type) {
     case "input1":
@@ -61,7 +62,7 @@ const VerifyOtp = () => {
       mobile_number: mobileNumber,
     };
     axios
-      .post("http://localhost:3000/dogechat/verifyotp", info)
+      .post(`${react_api_url}/dogechat/verifyotp`, info)
       .then((res) => {
         console.log(res);
         setAuth(res?.data?.success);
@@ -160,7 +161,6 @@ const VerifyOtp = () => {
                     movetoNextInput(e);
                 }}
                 onKeyUp={(e) => {
-                  // console.log("value", e.target.value);
                   if (e.key === "Backspace" && e.target.value === "") {
                     movetoNextInput(e);
                   }
