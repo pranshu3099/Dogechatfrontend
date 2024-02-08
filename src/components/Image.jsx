@@ -4,6 +4,7 @@ import Doge from "../icons/Doge.jpg";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const Image = () => {
   const [selectedFile, setSelectedFile] = useState([]);
   const [data, setData] = useState(null);
@@ -32,7 +33,7 @@ const Image = () => {
     try {
       formData.append("mobile_number", mobile_number);
       const response = axios
-        .post(`http://localhost:3000/api/uploadimage`, formData)
+        .post(`${react_api_url}/api/uploadimage`, formData)
         .then((res) => {
           setData(res?.data);
         })
