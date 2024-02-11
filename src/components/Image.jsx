@@ -33,7 +33,7 @@ const Image = () => {
     try {
       formData.append("mobile_number", mobile_number);
       const response = axios
-        .post(`${react_api_url}/api/uploadimage`, formData)
+        .post(`${react_api_url}/dogechat/uploadimage`, formData)
         .then((res) => {
           setData(res?.data);
         })
