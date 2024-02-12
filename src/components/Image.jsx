@@ -9,16 +9,8 @@ const Image = () => {
   const [selectedFile, setSelectedFile] = useState([]);
   const [data, setData] = useState(null);
   const location = useLocation();
-  let mobile_number = "";
-  if (location?.state === undefined) {
-    console.log(location?.state);
-    mobile_number = null;
-  } else {
-    console.log(location?.state);
-    let userInfo = location?.state;
-    mobile_number = userInfo?.mobileNumber;
-  }
-
+  const verificationInfo = location.state;
+  const { mobileNumber, userEmail } = verificationInfo;
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     console.log(file);
@@ -31,7 +23,7 @@ const Image = () => {
       formData.append("images", image);
     });
     try {
-      formData.append("mobile_number", mobile_number);
+      formData.append("mobile_number", mobileNumber);
       const response = axios
         .post(`${react_api_url}/dogechat/uploadimage`, formData)
         .then((res) => {
@@ -83,12 +75,7 @@ const Image = () => {
           </div>
         </div>
       </div>
-      {data && (
-        <Navigate
-          to="/dogechat/login"
-          state={{ mobileNumber: data?.mobile_number, data: data }}
-        />
-      )}
+      {data && <Navigate to="/dogechat/login" state={{ data: data }} />}
     </>
   );
 };
