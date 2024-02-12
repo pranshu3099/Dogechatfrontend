@@ -2,17 +2,17 @@ import Doge from "../icons/Doge.jpg";
 import { Input, Button } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import Axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, json } from "react-router-dom";
 import { useState } from "react";
 import useFetch from "../../usefetch/auth";
 import { useLocation } from "react-router-dom";
-import phone from "../icons/phone-svgrepo-com.svg";
+import email from "../icons/mail-svgrepo-com.svg";
 const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const axios = Axios.create({
   withCredentials: true,
 });
 const Login = () => {
-  const [mobileNumber, setMobileNumber] = React.useState("");
+  const [youremail, setYourEmail] = React.useState("");
   const [auth, setAuth] = useState(false);
   const [Error, setError] = useState("");
   const { data, err } = useFetch();
@@ -21,9 +21,14 @@ const Login = () => {
   if (!profilepicture) {
     profilepicture = data?.user?.profilepicture;
   }
+  const user_info = JSON.parse(localStorage.getItem("user_info"));
+  const mobile_number = user_info?.mobile_number;
+
+  console.log(mobile_number);
   const fetchData = () => {
     const info = {
-      mobile_number: mobileNumber,
+      email: youremail,
+      mobile_number: mobile_number,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -32,13 +37,13 @@ const Login = () => {
     axios
       .post(
         `${react_api_url}/dogechat/login`,
-        { mobile_number: info.mobile_number },
+        { email: info.email },
         {
           headers: info.headers,
         }
       )
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           setAuth(true);
           console.log(response);
         }
@@ -70,20 +75,20 @@ const Login = () => {
         <form action="">
           <div className="login-container">
             <Input
-              type="number"
-              placeholder="mobile number"
+              type="text"
+              placeholder="your email"
               width={"500px"}
               margin={5}
               variant="flushed"
-              name="mobile_number"
-              value={mobileNumber}
+              name="email"
+              value={youremail}
               onChange={(e) => {
-                setMobileNumber(e.target.value);
+                setYourEmail(e.target.value);
               }}
               style={{ color: "white" }}
             />
           </div>
-          <img className="sign-up-icons" src={phone} alt="" />
+          <img className="sign-up-icons" src={email} alt="" />
           {Error !== "" && <p className="login-error">{Error}</p>}
           <div className="signup-btn">
             <Button colorScheme="blue" mr={3} mt={3} onClick={handleSubmit}>
@@ -92,9 +97,17 @@ const Login = () => {
           </div>
         </form>
       </div>
-      {(auth || data?.user) && (
-        <Navigate to="/dogechat" state={{ user: data?.user }} />
+      {auth && (
+        <Navigate
+          to="/dogechat/verifyotp"
+          state={{
+            mobileNumber: mobile_number,
+            for_login: true,
+            userEmail: youremail,
+          }}
+        />
       )}
+      {data?.user && <Navigate to="/dogechat" state={{ user: data?.user }} />}
     </>
   );
 };
