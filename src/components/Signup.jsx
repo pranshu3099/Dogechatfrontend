@@ -113,6 +113,9 @@ const Signup = () => {
       email: data.email,
     };
     if (checkRequiredfields(info)) {
+      let user_info = [];
+      user_info.push(info);
+      localStorage.setItem("user_info", JSON.stringify(user_info));
       fetchdata(info);
     }
   };
@@ -221,7 +224,7 @@ const Signup = () => {
       {auth && (
         <Navigate
           to="/dogechat/verifyotp"
-          state={{ mobileNumber: data?.mobile_number }}
+          state={{ mobileNumber: data?.mobile_number, userEmail: data?.email }}
         />
       )}
     </>
