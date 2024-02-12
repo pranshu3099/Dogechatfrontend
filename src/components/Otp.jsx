@@ -36,8 +36,9 @@ const otpReducer = (state, action) => {
 const VerifyOtp = () => {
   const location = useLocation();
   const verificationInfo = location.state;
-  let { mobileNumber } = verificationInfo;
+  let { mobileNumber, userEmail, for_login } = verificationInfo;
   const [auth, setAuth] = useState(false);
+  const [userLogin, setUserLogin] = useState(false);
   const [focusedInput, setFocusedInput] = useState(0);
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
@@ -59,13 +60,18 @@ const VerifyOtp = () => {
     let otp = data?.input1 + data?.input2 + data?.input3 + data?.input4;
     let info = {
       user_otp: otp,
-      mobile_number: mobileNumber,
+      email: userEmail,
+      user_login: for_login ? for_login : null,
     };
     axios
       .post(`${react_api_url}/dogechat/verifyotp`, info)
       .then((res) => {
         console.log(res);
-        setAuth(res?.data?.success);
+        if (res?.data?.user_login) {
+          setUserLogin(true);
+        } else {
+          setAuth(true);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -200,8 +206,12 @@ const VerifyOtp = () => {
           </div>
         </form>
       </div>
+      {userLogin && <Navigate to="/dogechat" />}
       {auth && (
-        <Navigate to="/dogechat/upload-image" state={{ mobileNumber }} />
+        <Navigate
+          to="/dogechat/upload-image"
+          state={{ userEmail, mobileNumber }}
+        />
       )}
     </>
   );
