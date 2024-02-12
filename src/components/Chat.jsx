@@ -9,7 +9,9 @@ export const Chat = () => {
   const [messagearr, setMessagesarr] = useState([]);
   const [getChats, setGetchats] = useState([]);
   const [open, setOpen] = useState(false);
-  const socket = io("http://localhost:3000", { path: "/socket.io" });
+  const socket = io(import.meta.env.VITE_REACT_APP_API_URL, {
+    path: "/socket.io",
+  });
   const location = useLocation();
   let profilepicture = location?.state?.user?.profile_picture;
   const addToLocalStorage = (new_message) => {
