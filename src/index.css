@@ -431,6 +431,17 @@ input[type="file"] {
   font-weight: bold;
 }
 
+/* -------------------- Loading ----------------- */
+
+.loading {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
 /* ----------------- profilepicture ----------------------- */
 
 @media screen and (max-width: 642px) {
