@@ -37,7 +37,6 @@ const Login = () => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        withCredentials: true,
       })
       .then((response) => {
         if (response.status === 201) {
