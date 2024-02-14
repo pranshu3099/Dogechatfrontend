@@ -1,6 +1,4 @@
 import ReactLoading from "react-loading";
-import dogeloading from "../icons/yyv6h-unscreen.gif";
-
 const Loading = () => {
   return (
     <>
