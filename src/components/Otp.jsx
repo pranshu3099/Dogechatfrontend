@@ -64,7 +64,13 @@ const VerifyOtp = () => {
       user_login: for_login ? for_login : null,
     };
     axios
-      .post(`${react_api_url}/dogechat/verifyotp`, info)
+      .post(`${react_api_url}/dogechat/verifyotp`, info, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         console.log(res);
         if (res?.data?.user_login) {
