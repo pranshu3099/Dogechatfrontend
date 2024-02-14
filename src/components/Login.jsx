@@ -7,6 +7,7 @@ import { useState } from "react";
 import useFetch from "../../usefetch/auth";
 import { useLocation } from "react-router-dom";
 import email from "../icons/mail-svgrepo-com.svg";
+import Loading from "./Loading";
 const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const axios = Axios.create({
   withCredentials: true,
@@ -16,32 +17,28 @@ const Login = () => {
   const [auth, setAuth] = useState(false);
   const [Error, setError] = useState("");
   const { data, err } = useFetch();
+  const [laoding, setLaoding] = useState(false);
   const location = useLocation();
   let profilepicture = location?.state?.data?.url[0].path;
   if (!profilepicture) {
     profilepicture = data?.user?.profilepicture;
   }
   const user_info = JSON.parse(localStorage.getItem("user_info"));
-  const mobile_number = user_info?.mobile_number;
+  const mobile_number = user_info[0]?.mobile_number;
 
-  console.log(mobile_number);
   const fetchData = () => {
     const info = {
       email: youremail,
       mobile_number: mobile_number,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
     };
     axios
-      .post(
-        `${react_api_url}/dogechat/login`,
-        { email: info.email },
-        {
-          headers: info.headers,
-        }
-      )
+      .post(`${react_api_url}/dogechat/login`, info, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
       .then((response) => {
         if (response.status === 201) {
           setAuth(true);
@@ -56,11 +53,14 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLaoding(true);
     fetchData();
   };
 
   return (
     <>
+      {laoding && <Loading />}
+
       <div className="login-main-container">
         <div className="login">
           <h1 className="login-h1">Login to Doge Chat</h1>

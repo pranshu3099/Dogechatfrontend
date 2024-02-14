@@ -6,6 +6,7 @@ import phone from "../icons/phone-svgrepo-com.svg";
 import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import Loading from "./Loading";
 const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const Signup = () => {
   const mobileValidate = (number) => {
@@ -74,7 +75,7 @@ const Signup = () => {
   });
   const [requiredFields, setRequireFields] = useState({});
   const [auth, setAuth] = useState(false);
-
+  const [laoding, setLaoding] = useState(false);
   function fetchdata(info) {
     axios
       .post(`${react_api_url}/dogechat/register`, info)
@@ -116,11 +117,13 @@ const Signup = () => {
       let user_info = [];
       user_info.push(info);
       localStorage.setItem("user_info", JSON.stringify(user_info));
+      setLaoding(true);
       fetchdata(info);
     }
   };
   return (
     <>
+      {laoding && <Loading />}
       <div className="signup-main-container">
         <div className="signup">
           <h1 className="signup-h1" style={{ color: "white" }}>
