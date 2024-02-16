@@ -7,6 +7,7 @@ import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Loading from "./Loading";
+import useFetch from "../../usefetch/auth";
 const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const Signup = () => {
   const mobileValidate = (number) => {
@@ -21,29 +22,29 @@ const Signup = () => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(text);
   };
 
-  const signupReducer = (data, action) => {
+  const signupReducer = (user_data, action) => {
     switch (action.type) {
       case "pending":
-        return data;
+        return user_data;
       case "name":
         if (!name_validate(action.name)) {
           return {
-            ...data,
+            ...user_data,
             name: action.name,
             nameValidation: action.nameValidation,
           };
         }
-        return { ...data, name: action.name, nameValidation: false };
+        return { ...user_data, name: action.name, nameValidation: false };
       case "mobile_number":
         if (!mobileValidate(action.mobile_number)) {
           return {
-            ...data,
+            ...user_data,
             mobile_number: action.mobile_number,
             mobileVerification: action.mobileVerification,
           };
         }
         return {
-          ...data,
+          ...user_data,
           mobile_number: action.mobile_number,
           mobileVerification: false,
         };
@@ -51,13 +52,13 @@ const Signup = () => {
       case "email":
         if (!emailValidate(action.email)) {
           return {
-            ...data,
+            ...user_data,
             email: action.email,
             emailVerification: action.emailVerification,
           };
         }
         return {
-          ...data,
+          ...user_data,
           email: action.email,
           emailVerification: false,
         };
@@ -66,7 +67,7 @@ const Signup = () => {
         throw new Error("type not matched");
     }
   };
-  const [data, dispatch] = useReducer(signupReducer, {
+  const [user_data, dispatch] = useReducer(signupReducer, {
     name: "",
 
     mobile_number: "",
@@ -76,6 +77,7 @@ const Signup = () => {
   const [requiredFields, setRequireFields] = useState({});
   const [auth, setAuth] = useState(false);
   const [laoding, setLaoding] = useState(false);
+  const { data, err } = useFetch();
   function fetchdata(info) {
     axios
       .post(`${react_api_url}/dogechat/register`, info)
@@ -108,10 +110,10 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const info = {
-      name: data.name,
+      name: user_data.name,
 
-      mobile_number: data.mobile_number,
-      email: data.email,
+      mobile_number: user_data.mobile_number,
+      email: user_data.email,
     };
     if (checkRequiredfields(info)) {
       let user_info = [];
@@ -143,10 +145,10 @@ const Signup = () => {
                 margin={5}
                 variant="flushed"
                 name="name"
-                value={data.name}
+                value={user_data.name}
                 onChange={(e) => {
                   dispatch({
-                    ...data,
+                    ...user_data,
                     name: e.target.value,
                     type: "name",
                     nameValidation: true,
@@ -155,7 +157,7 @@ const Signup = () => {
                 style={{ color: "white" }}
               />
               <img className="sign-up-icons" src={user} alt="" />
-              {data.nameValidation && (
+              {user_data.nameValidation && (
                 <div style={{ color: "red" }}>Invalid Name</div>
               )}
               {requiredFields.name && (
@@ -168,10 +170,10 @@ const Signup = () => {
                 margin={5}
                 variant="flushed"
                 name="mobile_number"
-                value={data.mobile_number}
+                value={user_data.mobile_number}
                 onChange={(e) => {
                   dispatch({
-                    ...data,
+                    ...user_data,
                     mobile_number: e.target.value,
                     type: "mobile_number",
                     mobileVerification: true,
@@ -180,7 +182,7 @@ const Signup = () => {
                 style={{ color: "white" }}
               />
               <img className="sign-up-icons" src={phone} alt="" />
-              {data.mobileVerification && (
+              {user_data.mobileVerification && (
                 <div style={{ color: "red" }}>
                   Mobile number must be of 10 digits
                 </div>
@@ -196,10 +198,10 @@ const Signup = () => {
                 margin={5}
                 variant="flushed"
                 name="email"
-                value={data.email}
+                value={user_data.email}
                 onChange={(e) => {
                   dispatch({
-                    ...data,
+                    ...user_data,
                     email: e.target.value,
                     type: "email",
                     emailVerification: true,
@@ -208,7 +210,7 @@ const Signup = () => {
                 style={{ color: "white" }}
               />
               <img className="sign-up-icons" src={email} alt="" />
-              {data.emailVerification && (
+              {user_data.emailVerification && (
                 <div style={{ color: "red" }}>Invalid email address</div>
               )}
               {requiredFields.email && (
@@ -227,9 +229,13 @@ const Signup = () => {
       {auth && (
         <Navigate
           to="/dogechat/verifyotp"
-          state={{ mobileNumber: data?.mobile_number, userEmail: data?.email }}
+          state={{
+            mobileNumber: user_data?.mobile_number,
+            userEmail: user_data?.email,
+          }}
         />
       )}
+      {data?.user && <Navigate to="/dogechat" state={{ user: data?.user }} />}
     </>
   );
 };
