@@ -10,7 +10,7 @@ export const Chat = () => {
   const [getChats, setGetchats] = useState([]);
   const [open, setOpen] = useState(false);
   const socket = io(import.meta.env.VITE_REACT_APP_API_URL, {
-    path: "/socket.io",
+    path: "/dogechat/socket.io",
   });
   const location = useLocation();
   let profilepicture = location?.state?.user?.profile_picture;
