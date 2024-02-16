@@ -40,7 +40,7 @@ export const Chat = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [messagearr]);
 
   useEffect(() => {
     let chats = JSON.parse(localStorage.getItem("chats"));
