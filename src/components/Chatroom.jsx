@@ -17,7 +17,6 @@ const Chatroom = ({
   const [emojipicker, setEmojipicker] = useState(false);
   const chatContainerRef = useRef();
   useEffect(() => {
-    console.log("first");
     const scrollToBottom = () => {
       if (chatContainerRef.current) {
         chatContainerRef.current.scrollTop =
