@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Axios from "axios";
 import { Navigate, json } from "react-router-dom";
 import { useState } from "react";
-import useFetch from "../../usefetch/auth";
+import TokenValidity from "../../tokenvalidity/auth";
 import { useLocation } from "react-router-dom";
 import email from "../icons/mail-svgrepo-com.svg";
 import Loading from "./Loading";
@@ -17,7 +17,7 @@ const Login = () => {
   const [auth, setAuth] = useState(false);
   const [Error, setError] = useState("");
   const [loading, setloading] = useState(false);
-  const { data, err } = useFetch();
+  const { data, err } = TokenValidity();
   const location = useLocation();
   let profilepicture = location?.state?.data?.url[0].path;
   if (!profilepicture) {
@@ -61,9 +61,7 @@ const Login = () => {
 
       {!data?.success && (
         <div className="login-main-container">
-          <div className="login">
-            <h1 className="login-h1">Login to Doge Chat</h1>
-          </div>
+          <h1 className="login-h1">Login to Doge Chat</h1>
           <div className="image-wrapper">
             <img
               src={profilepicture ? profilepicture : Doge}
@@ -71,32 +69,32 @@ const Login = () => {
               className={profilepicture ? "profilepicture" : "doge-img"}
             />
           </div>
-          <form action="">
-            <div className="login-container">
-              <Input
-                type="text"
-                placeholder="your email"
-                width={"500px"}
-                margin={5}
-                variant="flushed"
-                name="email"
-                value={youremail}
-                onChange={(e) => {
-                  setYourEmail(e.target.value);
-                }}
-                style={{ color: "white" }}
-              />
-            </div>
-            <img className="sign-up-icons" src={email} alt="" />
-            {Error !== "" && <p className="login-error">{Error}</p>}
-            <div className="signup-btn">
-              <Button colorScheme="blue" mr={3} mt={3} onClick={handleSubmit}>
-                Login
-              </Button>
-            </div>
-          </form>
+          <div className="login-container">
+            <Input
+              type="text"
+              placeholder="your email"
+              width={"500px"}
+              margin={5}
+              variant="flushed"
+              name="email"
+              value={youremail}
+              className="login-input"
+              onChange={(e) => {
+                setYourEmail(e.target.value);
+              }}
+              style={{ color: "white" }}
+            />
+          </div>
+          <img className="login-icons" src={email} alt="" />
+          {Error !== "" && <p className="login-error">{Error}</p>}
+          <div className="login-btn">
+            <Button colorScheme="blue" mr={3} mt={3} onClick={handleSubmit}>
+              Login
+            </Button>
+          </div>
         </div>
       )}
+
       {auth && (
         <Navigate
           to="/dogechat/verifyotp"
