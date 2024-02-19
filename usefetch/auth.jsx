@@ -14,7 +14,7 @@ const useFetch = () => {
           credentials: "include",
         });
         const data = await res.json();
-        if (data?.success) {
+        if (data) {
           setData(data);
         }
       } catch (err) {
