@@ -5,18 +5,6 @@ body {
 p {
   color: white;
 }
-.login {
-  height: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 57px;
-}
-
-.login-container {
-  display: flex;
-  justify-content: space-around;
-}
 
 .login-h1 {
   font-family: "Cedarville Cursive", cursive;
@@ -26,20 +14,10 @@ p {
   color: white;
 }
 
-.login-container div {
-  display: flex;
-  flex-direction: column;
-}
-.login-icons {
-  width: 1.5rem;
-  position: relative;
-  left: 31rem;
-  bottom: 3rem;
-  cursor: pointer;
-}
 .login-main-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   margin: 0 auto;
   width: 800px;
@@ -47,13 +25,31 @@ p {
   margin-top: 28px;
 }
 .doge-img {
-  width: 280px;
+  width: 580px;
   border-radius: 150px;
 }
 
 .login-error {
   color: red;
   height: 3vh;
+  text-align: center;
+}
+.image-wrapper {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-icons {
+  width: 1.5rem;
+  position: relative;
+  left: 29%;
+  bottom: 3.5rem;
+  cursor: pointer;
+}
+
+.login-btn {
   text-align: center;
 }
 
@@ -132,6 +128,15 @@ p {
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
+}
+
+.user-image-main-container h1 {
+  color: gray;
+  font-size: 30px;
+}
+
+.upload-img p {
+  color: gray;
 }
 
 .user-image-container {
@@ -447,6 +452,10 @@ input[type="file"] {
   font-weight: bold;
 }
 
+.doge-img-container img {
+  width: 200px;
+}
+
 /* -------------------- Loading ----------------- */
 
 .loading {
@@ -466,5 +475,146 @@ input[type="file"] {
     background-color: #121b22;
     width: 100%;
     height: 100vh;
+  }
+
+  /* ----------- home ------------- */
+
+  .home-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    /* background-color: #005c4b; */
+  }
+
+  .home-sub-container {
+    background-color: rgba(0, 0, 0, 0.497);
+    height: 100vh;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .home-signup-container {
+    /* background-color: red; */
+    background-color: #005c4b;
+    height: 100vh;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .home-sub-container h1 {
+    font-size: 30px;
+  }
+
+  .home-signup-container h1 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .home-signup-container p {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+  }
+
+  .home-login-btn {
+    letter-spacing: 2px;
+    background-color: gray;
+    padding: 16px;
+    border-radius: 30px;
+    color: white;
+    font-size: 17px;
+  }
+
+  .home-signup-btn {
+    background-color: white;
+    padding: 16px;
+    border-radius: 30px;
+    color: black;
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  /* ------------ login ------------------ */
+
+  .login-main-container {
+    width: 100%;
+  }
+
+  .login-main-container h1 {
+    font-size: 30px;
+  }
+
+  .doge-img {
+    width: 580px;
+    border-radius: 150px;
+  }
+
+  .login-error {
+    color: red;
+    height: 3vh;
+    text-align: center;
+  }
+
+  .login-icons {
+    width: 1.5rem;
+    position: relative;
+    left: 29%;
+    bottom: 3.5rem;
+    cursor: pointer;
+  }
+  .login-input {
+    width: 270px !important;
+  }
+
+  /* ------------ signup -------------------- */
+
+  .sign-up-icons {
+    width: 1.5rem;
+    position: relative;
+    left: 85%;
+    bottom: 3.5rem;
+    cursor: pointer;
+  }
+
+  .signup {
+    height: 7rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+  }
+
+  .signup h1 {
+    font-size: 21px;
+  }
+
+  .form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .signup-main-container {
+    width: 100%;
+  }
+
+  .sign-input {
+    width: 320px !important;
+  }
+  .signup-error {
+    text-align: center;
   }
 }
