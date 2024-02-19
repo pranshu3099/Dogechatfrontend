@@ -1,13 +1,12 @@
 import Doge from "../icons/Doge.jpg";
 import { Navigate } from "react-router-dom";
-import useFetch from "../../usefetch/auth";
+import TokenValidity from "../../tokenvalidity/auth";
 import Loading from "./Loading";
 const home = () => {
-  const { data, err } = useFetch();
+  const { data, err } = TokenValidity();
   return (
     <>
       {!data && <Loading />}
-
       {!data?.success && (
         <div className="home-main-container">
           <div className="home-sub-container">
@@ -23,7 +22,7 @@ const home = () => {
           </div>
           <div className="home-signup-container">
             <div>
-              <h1>New Here</h1>
+              <h1>New Here ?</h1>
               <p>Sign-up and have fun chatting with doge</p>
             </div>
             <div className="home-signup-btn">

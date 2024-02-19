@@ -40,6 +40,7 @@ const Image = () => {
   return (
     <>
       <div className="user-image-main-container">
+        <h1>Upload your image</h1>
         <div className="doge-img-container">
           <img src={Doge} alt="" className="doge-img" />
         </div>
@@ -47,7 +48,7 @@ const Image = () => {
           <form method="post" encType="multipart/form-data">
             <div className="upload-img">
               <img style={{ width: "80px" }} src={upload} alt="" />
-              <p>Drag and drop files to upload or</p>
+              <p>Drag and drop files to upload image</p>
             </div>
             <div className="input">
               <label htmlFor="files" className="custom-file-input">
