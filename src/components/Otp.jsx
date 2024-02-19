@@ -50,7 +50,6 @@ const VerifyOtp = () => {
     input3: "",
     input4: "",
   });
-  // console.log(data);
 
   useEffect(() => {
     inputRef1.current?.focus();
@@ -127,7 +126,6 @@ const VerifyOtp = () => {
                     movetoNextInput(e);
                 }}
                 onKeyUp={(e) => {
-                  // console.log("value", e.target.value);
                   if (e.key === "Backspace" && e.target.value === "") {
                     movetoNextInput(e);
                   }
@@ -150,7 +148,6 @@ const VerifyOtp = () => {
                     movetoNextInput(e);
                 }}
                 onKeyUp={(e) => {
-                  // console.log("value", e.target.value);
                   if (e.key === "Backspace" && e.target.value === "") {
                     movetoNextInput(e);
                   }
@@ -195,8 +192,6 @@ const VerifyOtp = () => {
                     movetoNextInput(e);
                 }}
                 onKeyUp={(e) => {
-                  // console.log("value", e.target.value);
-
                   if (e.key === "Backspace" && e.target.value === "") {
                     movetoNextInput(e);
                   }
