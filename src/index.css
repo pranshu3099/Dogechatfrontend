@@ -100,6 +100,22 @@ p {
   gap: 2rem;
 }
 
+.signup-login-container {
+  /* background-color: red; */
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.signup-login-container p {
+  color: gray;
+  font-size: 20px;
+}
+
+.signup-login-container p a {
+  text-decoration: underline;
+}
+
 /* ----------- otp page --------- */
 
 .otp-container {
