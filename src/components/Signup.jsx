@@ -76,7 +76,7 @@ const Signup = () => {
   });
   const [requiredFields, setRequireFields] = useState({});
   const [auth, setAuth] = useState(false);
-  const [laoding, setLaoding] = useState(false);
+  const [loading, setloading] = useState(false);
   const { data, err } = useFetch();
   function fetchdata(info) {
     axios
@@ -119,13 +119,13 @@ const Signup = () => {
       let user_info = [];
       user_info.push(info);
       localStorage.setItem("user_info", JSON.stringify(user_info));
-      setLaoding(true);
+      setloading(true);
       fetchdata(info);
     }
   };
   return (
     <>
-      {laoding && <Loading />}
+      {!data && <Loading />}
       <div className="signup-main-container">
         <div className="signup">
           <h1 className="signup-h1" style={{ color: "white" }}>
@@ -221,6 +221,11 @@ const Signup = () => {
                 <Button colorScheme="blue" mr={3} mt={3} onClick={handleSubmit}>
                   Signup
                 </Button>
+              </div>
+              <div className="signup-login-container">
+                <p>
+                  Already have an account <a href="/dogechat/login">login</a>
+                </p>
               </div>
             </div>
           </div>
