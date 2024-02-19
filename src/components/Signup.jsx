@@ -7,7 +7,8 @@ import { useReducer, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Loading from "./Loading";
-import useFetch from "../../usefetch/auth";
+import TokenValidity from "../../tokenvalidity/auth";
+
 const react_api_url = import.meta.env.VITE_REACT_APP_API_URL;
 const Signup = () => {
   const mobileValidate = (number) => {
@@ -77,7 +78,7 @@ const Signup = () => {
   const [requiredFields, setRequireFields] = useState({});
   const [auth, setAuth] = useState(false);
   const [loading, setloading] = useState(false);
-  const { data, err } = useFetch();
+  const { data, err } = TokenValidity();
   function fetchdata(info) {
     axios
       .post(`${react_api_url}/dogechat/register`, info)
@@ -146,6 +147,7 @@ const Signup = () => {
                 variant="flushed"
                 name="name"
                 value={user_data.name}
+                className="sign-input"
                 onChange={(e) => {
                   dispatch({
                     ...user_data,
@@ -158,10 +160,14 @@ const Signup = () => {
               />
               <img className="sign-up-icons" src={user} alt="" />
               {user_data.nameValidation && (
-                <div style={{ color: "red" }}>Invalid Name</div>
+                <div style={{ color: "red" }} className="signup-error">
+                  Invalid Name
+                </div>
               )}
               {requiredFields.name && (
-                <div style={{ color: "red" }}>Name field is required</div>
+                <div style={{ color: "red" }} className="signup-error">
+                  Name field is required
+                </div>
               )}
               <Input
                 type="number"
@@ -171,6 +177,7 @@ const Signup = () => {
                 variant="flushed"
                 name="mobile_number"
                 value={user_data.mobile_number}
+                className="sign-input"
                 onChange={(e) => {
                   dispatch({
                     ...user_data,
@@ -183,12 +190,15 @@ const Signup = () => {
               />
               <img className="sign-up-icons" src={phone} alt="" />
               {user_data.mobileVerification && (
-                <div style={{ color: "red" }}>
+                <div style={{ color: "red" }} className="signup-error">
                   Mobile number must be of 10 digits
                 </div>
               )}
               {requiredFields.mobile_number && (
-                <div style={{ color: "red" }}> Mobile number is required</div>
+                <div style={{ color: "red" }} className="signup-error">
+                  {" "}
+                  Mobile number is required
+                </div>
               )}
 
               <Input
@@ -199,6 +209,7 @@ const Signup = () => {
                 variant="flushed"
                 name="email"
                 value={user_data.email}
+                className="sign-input"
                 onChange={(e) => {
                   dispatch({
                     ...user_data,
@@ -211,10 +222,15 @@ const Signup = () => {
               />
               <img className="sign-up-icons" src={email} alt="" />
               {user_data.emailVerification && (
-                <div style={{ color: "red" }}>Invalid email address</div>
+                <div style={{ color: "red" }} className="signup-error">
+                  Invalid email address
+                </div>
               )}
               {requiredFields.email && (
-                <div style={{ color: "red" }}> email address is required</div>
+                <div style={{ color: "red" }} className="signup-error">
+                  {" "}
+                  email address is required
+                </div>
               )}
 
               <div className="signup-btn">
