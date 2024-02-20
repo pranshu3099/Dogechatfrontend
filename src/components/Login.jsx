@@ -51,8 +51,12 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setloading(true);
-    fetchData();
+    if (youremail === "") {
+      setError("Email is required");
+    } else {
+      setloading(true);
+      fetchData();
+    }
   };
 
   return (
