@@ -214,10 +214,10 @@ input[type="file"] {
 .chat-main-container {
   display: flex;
   background-color: #202c33;
-  height: 95vh;
+  height: 100vh;
   max-width: 90rem;
   margin: 0 auto;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 }
 
 .chat-container {
@@ -467,6 +467,15 @@ input[type="file"] {
   gap: 2.5rem;
 }
 
+::-webkit-scrollbar-thumb {
+  background-color: #1269ac;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #121b22;
+}
+
 /* ----------------- profilepicture ----------------------- */
 
 @media screen and (max-width: 642px) {
@@ -616,5 +625,12 @@ input[type="file"] {
   }
   .signup-error {
     text-align: center;
+  }
+
+  .emoji-container {
+    width: 320px !important;
+    position: absolute !important;
+    bottom: 60px;
+    right: 25%;
   }
 }
